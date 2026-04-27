@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    container_name: medagenda-backend
+    ports:
+      - '3000:3000'
+
+  frontend:
+    build: ./frontend
+    container_name: medagenda-frontend
+    ports:
+      - '5173:5173'
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://backend:3000
